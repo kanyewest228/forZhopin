@@ -16,8 +16,8 @@ class Route
 
     public static function add(string $route, array $action): void
     {
-        if(!array_key_exists($route, self::$routes)) {
-            self::$routes[$route] = [];
+        if (!array_key_exists($route, self::$routes)) {
+            self::$routes[$route] = $action;
         }
     }
 
@@ -36,7 +36,7 @@ class Route
             throw new Error("Class $class does not exist");
         }
         if (!method_exists($class, $action)) {
-            throw new Error("Action $action does not exist");
+            throw new Error("Method $action does not exist");
         }
 
         call_user_func([new $class, $action]);
